@@ -80,6 +80,7 @@ Available serializers:
 * `SerializardReflection`
 * `SymfonyGetSetNormalizer`
 * `SymfonyObjectNormalizer`
+* `TSantos`
 
 
 ## Contribute

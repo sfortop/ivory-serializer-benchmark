@@ -6,6 +6,7 @@ namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
+use TSantos\Serializer\Mapping as TSantos;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -17,6 +18,7 @@ class Category implements \JsonSerializable
     /**
      * @Ivory\Type("int")
      * @Jms\Type("integer")
+     * @TSantos\Type("integer")
      *
      * @var int
      */
@@ -25,6 +27,7 @@ class Category implements \JsonSerializable
     /**
      * @Ivory\Type("PhpSerializers\Benchmarks\Model\Category")
      * @Jms\Type("PhpSerializers\Benchmarks\Model\Category")
+     * @TSantos\Type("PhpSerializers\Benchmarks\Model\Category")
      *
      * @var Category|null
      */
@@ -33,6 +36,7 @@ class Category implements \JsonSerializable
     /**
      * @Ivory\Type("array<key=int, value=PhpSerializers\Benchmarks\Model\Category>")
      * @Jms\Type("array<integer, PhpSerializers\Benchmarks\Model\Category>")
+     * @TSantos\Type("PhpSerializers\Benchmarks\Model\Category[]")
      *
      * @var Category[]
      */

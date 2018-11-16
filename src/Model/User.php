@@ -6,6 +6,7 @@ namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
+use TSantos\Serializer\Mapping as TSantos;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -17,6 +18,7 @@ class User implements \JsonSerializable
     /**
      * @Ivory\Type("int")
      * @Jms\Type("integer")
+     * @TSantos\Type("integer")
      *
      * @var int
      */
@@ -25,6 +27,7 @@ class User implements \JsonSerializable
     /**
      * @Ivory\Type("string")
      * @Jms\Type("string")
+     * @TSantos\Type("string")
      *
      * @var string
      */
@@ -33,6 +36,7 @@ class User implements \JsonSerializable
     /**
      * @Ivory\Type("string")
      * @Jms\Type("string")
+     * @TSantos\Type("string")
      *
      * @var string
      */
@@ -41,6 +45,7 @@ class User implements \JsonSerializable
     /**
      * @Ivory\Type("bool")
      * @Jms\Type("boolean")
+     * @TSantos\Type("boolean")
      *
      * @var bool
      */

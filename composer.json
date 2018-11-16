@@ -10,7 +10,8 @@
     "symfony/property-access": "^4.0",
     "symfony/serializer": "^4.0",
     "thunderer/serializard": "^0.3",
-    "phpbench/phpbench": "^0.14.0"
+    "phpbench/phpbench": "^0.14.0",
+    "tsantos/serializer": "dev-jms-metadata-v2"
   },
   "authors": [
     {
