@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Bench;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
@@ -8,39 +10,34 @@ use Doctrine\Common\Cache\ApcuCache;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 use Metadata\Cache\DoctrineCacheAdapter;
+use PhpSerializers\Benchmarks\AbstractBench;
+use PhpSerializers\Benchmarks\Model\Forum;
 
 /**
  * @author Asmir Mustafic <goetas@gmail.com>
  */
-class JmsMinimalBenchmark extends AbstractBenchmark
+class JmsMinimalBenchmark extends AbstractBench
 {
     /**
      * @var Serializer
      */
     private $serializer;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
+    public function initSerializer(): void
     {
         $cache = new ApcuCache();
         $this->serializer = SerializerBuilder::create()
             ->setAnnotationReader(new CachedReader(new AnnotationReader(), $cache, false))
             ->setMetadataCache(new DoctrineCacheAdapter(__CLASS__, $cache))
-            ->configureListeners(function (){})
-            ->configureHandlers(function (){})
+            ->configureListeners(function () {
+            })
+            ->configureHandlers(function () {
+            })
             ->build();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute($horizontalComplexity = 1, $verticalComplexity = 1)
+    public function serialize(Forum $data): void
     {
-        return $this->serializer->serialize(
-            $this->getData($horizontalComplexity, $verticalComplexity),
-            $this->getFormat()
-        );
+        $this->serializer->serialize($data, 'json');
     }
 }

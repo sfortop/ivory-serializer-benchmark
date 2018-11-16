@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark\Model;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Model;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -24,7 +26,7 @@ trait TimestampableTrait
     /**
      * @return \DateTimeImmutable
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -40,7 +42,7 @@ trait TimestampableTrait
     /**
      * @return \DateTime|null
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }

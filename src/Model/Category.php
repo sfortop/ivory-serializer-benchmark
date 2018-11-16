@@ -1,10 +1,11 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark\Model;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
-use Symfony\Component\Serializer\Annotation as Symfony;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -22,27 +23,27 @@ class Category implements \JsonSerializable
     private $id;
 
     /**
-     * @Ivory\Type("Ivory\Tests\Serializer\Benchmark\Model\Category")
-     * @Jms\Type("Ivory\Tests\Serializer\Benchmark\Model\Category")
+     * @Ivory\Type("PhpSerializers\Benchmarks\Model\Category")
+     * @Jms\Type("PhpSerializers\Benchmarks\Model\Category")
      *
      * @var Category|null
      */
     private $parent;
 
     /**
-     * @Ivory\Type("array<key=int, value=Ivory\Tests\Serializer\Benchmark\Model\Category>")
-     * @Jms\Type("array<integer, Ivory\Tests\Serializer\Benchmark\Model\Category>")
+     * @Ivory\Type("array<key=int, value=PhpSerializers\Benchmarks\Model\Category>")
+     * @Jms\Type("array<integer, PhpSerializers\Benchmarks\Model\Category>")
      *
      * @var Category[]
      */
     private $children = [];
 
     /**
-     * @param int           $id
+     * @param int $id
      * @param Category|null $parent
-     * @param Category[]    $children
+     * @param Category[] $children
      */
-    public function __construct($id, Category $parent = null, array $children = [])
+    public function __construct(int $id, Category $parent = null, array $children = [])
     {
         $this->setId($id);
         $this->setParent($parent);
@@ -53,7 +54,7 @@ class Category implements \JsonSerializable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -61,7 +62,7 @@ class Category implements \JsonSerializable
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -69,7 +70,7 @@ class Category implements \JsonSerializable
     /**
      * @return Category|null
      */
-    public function getParent()
+    public function getParent(): ?Category
     {
         return $this->parent;
     }
@@ -85,7 +86,7 @@ class Category implements \JsonSerializable
     /**
      * @return Category[]
      */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
@@ -93,7 +94,7 @@ class Category implements \JsonSerializable
     /**
      * @param Category[] $children
      */
-    public function setChildren($children)
+    public function setChildren(array $children)
     {
         $this->children = $children;
     }

@@ -41,37 +41,33 @@ $ docker-compose run --rm php composer install
 
 ### Benchmark
 
-To benchmark a single serialization, you can use:
+We use [PHPBench](https://phpbench.readthedocs.io/) internally, with sane defaults setup for benchmarking the serializers.
+
+To benchmark serialization, you can use:
 
 ``` bash
-$ docker-compose run --rm php bin/benchmark
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted
 ```
 
-If you want to get a more accurate value, you can use the `iteration` option which will run the benchmark `n` times 
-and will give you the average of the executions:
+By default, the benchmarks run 5 [Revolutions])https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#improving-precision-revolutions)  5 [Iterations](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#verifying-and-improving-stability-iterations).
+You can override either with the `iterations` and `revs` option options.
 
 ``` bash
-$ docker-compose run --rm php bin/benchmark --iteration 100
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted --iterations=10 --revs=10
 ```
 
-If you want to increase the horizontal complexity of the serialization, you can use the `horizontal-complexity` option 
-which represents a complexity factor:
+If you want to increase the horizontal complexity of the serialization, you can use the `parameters` option 
+which is an array of two integers, the first representing the horizontal and the second representing the vertical complexity.
+The defaults are horizontal=10, vertical=10.
 
 ``` bash
-$ docker-compose run --rm php bin/benchmark --horizontal-complexity 4
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[1,60]'
 ```
 
-If you want to increase the vertical complexity of the serialization, you can use the `vertical-complexity` option 
-which represents a complexity factor:
+If you want to run the benchmark only for a specific or subset of serializers, you can use the `filter` option:
 
 ``` bash
-$ docker-compose run --rm php bin/benchmark --vertical-complexity 4
-```
-
-If you want to run the benchmark only for a specific serializer, you can use the `serializer` option:
-
-``` bash
-$ docker-compose run --rm php bin/benchmark --serializer SymfonyGetSetNormalizer
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted --filter=Symfony
 ```
 
 Available serializers:
@@ -85,11 +81,12 @@ Available serializers:
 * `SymfonyGetSetNormalizer`
 * `SymfonyObjectNormalizer`
 
+
 ## Contribute
 
-We love contributors! Ivory is an open source project. If you'd like to contribute, feel free to propose a PR!.
+We love contributors! PhpSerializers is an open source project. If you'd like to contribute, feel free to propose a PR!.
 
 ## License
 
-The Ivory Serializer is under the MIT license. For the full copyright and license information, please read the
+The Php Serializers Benchmark is under the MIT license. For the full copyright and license information, please read the
 [LICENSE](/LICENSE) file that was distributed with this source code.

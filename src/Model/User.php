@@ -1,10 +1,11 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark\Model;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
-use Symfony\Component\Serializer\Annotation as Symfony;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>

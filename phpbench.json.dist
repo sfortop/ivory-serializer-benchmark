@@ -1,0 +1,11 @@
+{
+    "bootstrap": "autoload.php",
+    "path": "src/Bench",
+    "reports": {
+        "aggregate-sorted": {
+            "generator": "table",
+            "cols": ["benchmark", "params", "revs", "its", "mem_peak", "best", "mean", "mode", "worst", "stdev", "rstdev", "diff"],
+            "sort": {"mean": "asc"}
+        }
+    }
+}

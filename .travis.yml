@@ -9,12 +9,12 @@ matrix:
     - php: 7.2
 
 install:
-    - phpenv config-rm xdebug.ini || echo 'xdebug not available'
-    - phpenv config-add docker/php/config/php.ini
-    - composer install --classmap-authoritative
+  - phpenv config-rm xdebug.ini || echo 'xdebug not available'
+  - phpenv config-add docker/php/config/php.ini
+  - composer install --classmap-authoritative
 
 script:
-    - bin/benchmark --vertical-complexity 1   --horizontal-complexity 60  --iteration 3
-    - bin/benchmark --vertical-complexity 60  --horizontal-complexity 1   --iteration 3
-    - bin/benchmark --vertical-complexity 60  --horizontal-complexity 60  --iteration 3
+  - ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[1,60]' --progress=dots
+  - ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[60,1]' --progress=dots
+  - ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[60,60]' --progress=dots
 
