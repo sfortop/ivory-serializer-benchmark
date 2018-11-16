@@ -1,10 +1,11 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark\Model;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
-use Symfony\Component\Serializer\Annotation as Symfony;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -46,8 +47,8 @@ class Thread implements \JsonSerializable
     private $popularity;
 
     /**
-     * @Ivory\Type("array<key=int, value=Ivory\Tests\Serializer\Benchmark\Model\Comment>")
-     * @Jms\Type("array<integer, Ivory\Tests\Serializer\Benchmark\Model\Comment>")
+     * @Ivory\Type("array<key=int, value=PhpSerializers\Benchmarks\Model\Comment>")
+     * @Jms\Type("array<integer, PhpSerializers\Benchmarks\Model\Comment>")
      *
      * @var Comment[]
      */
@@ -60,7 +61,7 @@ class Thread implements \JsonSerializable
      * @param float $popularity
      * @param Comment[] $comments
      */
-    public function __construct($id, $title, $description, $popularity, array $comments = [])
+    public function __construct(int $id, string $title, string $description, float $popularity, array $comments = [])
     {
         $this->setId($id);
         $this->setTitle($title);
@@ -73,7 +74,7 @@ class Thread implements \JsonSerializable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -81,7 +82,7 @@ class Thread implements \JsonSerializable
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -89,7 +90,7 @@ class Thread implements \JsonSerializable
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -97,7 +98,7 @@ class Thread implements \JsonSerializable
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -105,7 +106,7 @@ class Thread implements \JsonSerializable
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -113,7 +114,7 @@ class Thread implements \JsonSerializable
     /**
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
@@ -121,7 +122,7 @@ class Thread implements \JsonSerializable
     /**
      * @return float
      */
-    public function getPopularity()
+    public function getPopularity(): float
     {
         return $this->popularity;
     }
@@ -129,7 +130,7 @@ class Thread implements \JsonSerializable
     /**
      * @param float $popularity
      */
-    public function setPopularity($popularity)
+    public function setPopularity(float $popularity)
     {
         $this->popularity = $popularity;
     }
@@ -137,7 +138,7 @@ class Thread implements \JsonSerializable
     /**
      * @return Comment[]
      */
-    public function getComments()
+    public function getComments(): array
     {
         return $this->comments;
     }

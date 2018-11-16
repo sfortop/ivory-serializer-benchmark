@@ -1,10 +1,11 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark\Model;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
-use Symfony\Component\Serializer\Annotation as Symfony;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -30,16 +31,16 @@ class Forum implements \JsonSerializable
     private $name;
 
     /**
-     * @Ivory\Type("Ivory\Tests\Serializer\Benchmark\Model\Category")
-     * @Jms\Type("Ivory\Tests\Serializer\Benchmark\Model\Category")
+     * @Ivory\Type("PhpSerializers\Benchmarks\Model\Category")
+     * @Jms\Type("PhpSerializers\Benchmarks\Model\Category")
      *
      * @var Category
      */
     private $category;
 
     /**
-     * @Ivory\Type("array<key=int, value=Ivory\Tests\Serializer\Benchmark\Model\Thread>")
-     * @Jms\Type("array<integer, Ivory\Tests\Serializer\Benchmark\Model\Thread>")
+     * @Ivory\Type("array<key=int, value=PhpSerializers\Benchmarks\Model\Thread>")
+     * @Jms\Type("array<integer, PhpSerializers\Benchmarks\Model\Thread>")
      *
      * @var Thread[]
      */
@@ -51,7 +52,7 @@ class Forum implements \JsonSerializable
      * @param Category|null $category
      * @param Thread[] $threads
      */
-    public function __construct($id, $name, Category $category = null, array $threads = [])
+    public function __construct(int $id, string $name, Category $category = null, array $threads = [])
     {
         $this->setId($id);
         $this->setName($name);
@@ -62,7 +63,7 @@ class Forum implements \JsonSerializable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -70,7 +71,7 @@ class Forum implements \JsonSerializable
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -78,7 +79,7 @@ class Forum implements \JsonSerializable
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -86,7 +87,7 @@ class Forum implements \JsonSerializable
     /**
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -94,7 +95,7 @@ class Forum implements \JsonSerializable
     /**
      * @return Category
      */
-    public function getCategory()
+    public function getCategory(): Category
     {
         return $this->category;
     }
@@ -110,7 +111,7 @@ class Forum implements \JsonSerializable
     /**
      * @return Thread[]
      */
-    public function getThreads()
+    public function getThreads(): array
     {
         return $this->threads;
     }

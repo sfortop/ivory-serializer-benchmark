@@ -1,29 +1,32 @@
 {
-    "require": {
-      "php": "^7.2",
-      "doctrine/cache": "^1.0",
-      "egeloen/serializer": "^1.0",
-      "jms/serializer": "^2.0",
-      "symfony/polyfill-apcu": "^1.0",
-      "symfony/cache": "^4.0",
-      "symfony/console": "^4.0",
-      "symfony/property-access": "^4.0",
-      "symfony/serializer": "^4.0",
-      "thunderer/serializard": "^0.3"
+  "require": {
+    "php": "^7.2",
+    "doctrine/cache": "^1.0",
+    "egeloen/serializer": "^1.0",
+    "jms/serializer": "^2.0",
+    "symfony/polyfill-apcu": "^1.0",
+    "symfony/cache": "^4.0",
+    "symfony/console": "^4.0",
+    "symfony/property-access": "^4.0",
+    "symfony/serializer": "^4.0",
+    "thunderer/serializard": "^0.3",
+    "phpbench/phpbench": "^0.14.0"
+  },
+  "authors": [
+    {
+      "name": "Eric Geleon",
+      "email": "geloen.eric@gmail.com",
+      "role": "author"
     },
-    "authors": [
-      {
-        "name": "Eric Geleon",
-        "email": "geloen.eric@gmail.com",
-        "role": "author"
-      },
-      {
-        "name": "Asmir Mustafic",
-        "email": "goetas@gmail.com",
-        "role": "maintainer"
-      }
-    ],
-    "autoload": {
-        "psr-4": { "Ivory\\Tests\\Serializer\\Benchmark\\": "src/" }
+    {
+      "name": "Asmir Mustafic",
+      "email": "goetas@gmail.com",
+      "role": "maintainer"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PhpSerializers\\Benchmarks\\": "src/"
+    }
+  }
 }

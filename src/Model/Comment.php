@@ -1,10 +1,11 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark\Model;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
-use Symfony\Component\Serializer\Annotation as Symfony;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -30,8 +31,8 @@ class Comment implements \JsonSerializable
     private $content;
 
     /**
-     * @Ivory\Type("Ivory\Tests\Serializer\Benchmark\Model\User")
-     * @Jms\Type("Ivory\Tests\Serializer\Benchmark\Model\User")
+     * @Ivory\Type("PhpSerializers\Benchmarks\Model\User")
+     * @Jms\Type("PhpSerializers\Benchmarks\Model\User")
      *
      * @var User
      */
@@ -42,7 +43,7 @@ class Comment implements \JsonSerializable
      * @param string $content
      * @param User|null $author
      */
-    public function __construct($id, $content, User $author = null)
+    public function __construct(int $id, string $content, User $author = null)
     {
         $this->setId($id);
         $this->setContent($content);
@@ -53,7 +54,7 @@ class Comment implements \JsonSerializable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -61,7 +62,7 @@ class Comment implements \JsonSerializable
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -69,7 +70,7 @@ class Comment implements \JsonSerializable
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -77,7 +78,7 @@ class Comment implements \JsonSerializable
     /**
      * @param string $content
      */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
@@ -85,7 +86,7 @@ class Comment implements \JsonSerializable
     /**
      * @return User|null
      */
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->author;
     }

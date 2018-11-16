@@ -1,11 +1,14 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark;
+declare(strict_types=1);
 
-use Ivory\Tests\Serializer\Benchmark\Model\Category;
-use Ivory\Tests\Serializer\Benchmark\Model\Comment;
-use Ivory\Tests\Serializer\Benchmark\Model\Forum;
-use Ivory\Tests\Serializer\Benchmark\Model\Thread;
+namespace PhpSerializers\Benchmarks\Bench;
+
+use PhpSerializers\Benchmarks\AbstractBench;
+use PhpSerializers\Benchmarks\Model\Category;
+use PhpSerializers\Benchmarks\Model\Comment;
+use PhpSerializers\Benchmarks\Model\Forum;
+use PhpSerializers\Benchmarks\Model\Thread;
 use Thunder\Serializard\Format\JsonFormat;
 use Thunder\Serializard\FormatContainer\FormatContainer;
 use Thunder\Serializard\HydratorContainer\FallbackHydratorContainer;
@@ -15,23 +18,20 @@ use Thunder\Serializard\Serializard;
 /**
  * @author Tomasz Kowalczyk <tomasz@kowalczyk.cc>
  */
-class SerializardClosureBenchmark extends AbstractBenchmark
+class SerializardClosureBenchmark extends AbstractBench
 {
     /**
      * @var Serializard
      */
     private $serializer;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
+    public function initSerializer(): void
     {
         $formats = new FormatContainer();
         $formats->add('json', new JsonFormat());
 
         $normalizers = new FallbackNormalizerContainer();
-        $normalizers->add(Forum::class, function(Forum $forum) {
+        $normalizers->add(Forum::class, function (Forum $forum) {
             return [
                 'id' => $forum->getId(),
                 'name' => $forum->getName(),
@@ -41,7 +41,7 @@ class SerializardClosureBenchmark extends AbstractBenchmark
                 'updatedAt' => $forum->getUpdatedAt(),
             ];
         });
-        $normalizers->add(Thread::class, function(Thread $thread) {
+        $normalizers->add(Thread::class, function (Thread $thread) {
             return [
                 'id' => $thread->getId(),
                 'popularity' => $thread->getPopularity(),
@@ -52,7 +52,7 @@ class SerializardClosureBenchmark extends AbstractBenchmark
                 'updatedAt' => $thread->getUpdatedAt(),
             ];
         });
-        $normalizers->add(Comment::class, function(Comment $comment) {
+        $normalizers->add(Comment::class, function (Comment $comment) {
             return [
                 'id' => $comment->getId(),
                 'content' => $comment->getContent(),
@@ -61,10 +61,10 @@ class SerializardClosureBenchmark extends AbstractBenchmark
                 'updatedAt' => $comment->getUpdatedAt(),
             ];
         });
-        $normalizers->add(\DateTimeImmutable::class, function(\DateTimeImmutable $dt) {
+        $normalizers->add(\DateTimeImmutable::class, function (\DateTimeImmutable $dt) {
             return $dt->format(\DATE_ATOM);
         });
-        $normalizers->add(Category::class, function(Category $category) {
+        $normalizers->add(Category::class, function (Category $category) {
             return [
                 'id' => $category->getId(),
                 'parent' => $category->getParent(),
@@ -79,14 +79,8 @@ class SerializardClosureBenchmark extends AbstractBenchmark
         $this->serializer = new Serializard($formats, $normalizers, $hydrators);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute($horizontalComplexity = 1, $verticalComplexity = 1)
+    public function serialize(Forum $data): void
     {
-        return $this->serializer->serialize(
-            $this->getData($horizontalComplexity, $verticalComplexity),
-            $this->getFormat()
-        );
+        $this->serializer->serialize($data, 'json');
     }
 }

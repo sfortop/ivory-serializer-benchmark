@@ -1,6 +1,8 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Bench;
 
 use Ivory\Serializer\Mapping\Factory\CacheClassMetadataFactory;
 use Ivory\Serializer\Mapping\Factory\ClassMetadataFactory;
@@ -9,22 +11,21 @@ use Ivory\Serializer\Registry\TypeRegistry;
 use Ivory\Serializer\Serializer;
 use Ivory\Serializer\Type\ObjectType;
 use Ivory\Serializer\Type\Type;
+use PhpSerializers\Benchmarks\AbstractBench;
+use PhpSerializers\Benchmarks\Model\Forum;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class IvoryBenchmark extends AbstractBenchmark
+class IvoryBenchmark extends AbstractBench
 {
     /**
      * @var Serializer
      */
     private $serializer;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
+    public function initSerializer(): void
     {
         $classMetadataFactory = new CacheClassMetadataFactory(
             ClassMetadataFactory::create(),
@@ -38,14 +39,8 @@ class IvoryBenchmark extends AbstractBenchmark
         $this->serializer = new Serializer(new Navigator($typeRegistry));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute($horizontalComplexity = 1, $verticalComplexity = 1)
+    public function serialize(Forum $data): void
     {
-        return $this->serializer->serialize(
-            $this->getData($horizontalComplexity, $verticalComplexity),
-            $this->getFormat()
-        );
+        $this->serializer->serialize($data, 'json');
     }
 }

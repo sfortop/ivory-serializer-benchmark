@@ -1,13 +1,15 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark;
+declare(strict_types=1);
+
+namespace PhpSerializers\Benchmarks\Bench;
 
 use Doctrine\Common\Annotations\AnnotationReader;
+use PhpSerializers\Benchmarks\AbstractBench;
+use PhpSerializers\Benchmarks\Model\Forum;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Encoder\YamlEncoder;
 use Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
@@ -18,17 +20,14 @@ use Symfony\Component\Serializer\Serializer;
 /**
  * @author GeLo <geloen.eric@gmail.com>
  */
-class SymfonyObjectNormalizerBenchmark extends AbstractBenchmark
+class SymfonyObjectNormalizerBenchmark extends AbstractBench
 {
     /**
      * @var Serializer
      */
     private $serializer;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
+    public function initSerializer(): void
     {
         $classMetadataFactory = new CacheClassMetadataFactory(
             new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader())),
@@ -41,18 +40,12 @@ class SymfonyObjectNormalizerBenchmark extends AbstractBenchmark
 
         $this->serializer = new Serializer(
             [new DateTimeNormalizer(), new ObjectNormalizer($classMetadataFactory, null, $propertyAccessor)],
-            [new JsonEncoder(), new XmlEncoder(), new YamlEncoder()]
+            [new JsonEncoder()]
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute($horizontalComplexity = 1, $verticalComplexity = 1)
+    public function serialize(Forum $data): void
     {
-        return $this->serializer->serialize(
-            $this->getData($horizontalComplexity, $verticalComplexity),
-            $this->getFormat()
-        );
+        $this->serializer->serialize($data, 'json');
     }
 }

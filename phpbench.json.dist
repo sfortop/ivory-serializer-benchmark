@@ -1,0 +1,11 @@
+{
+    "bootstrap": "autoload.php",
+    "path": "src/Bench",
+    "reports": {
+        "bench": {
+            "extends": "aggregate",
+            "break": ["params"],
+            "sort": {"mean": "asc"}
+        }
+    }
+}
