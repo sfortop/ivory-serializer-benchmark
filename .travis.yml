@@ -14,7 +14,5 @@ install:
   - composer install --classmap-authoritative
 
 script:
-  - ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[1,60]' --progress=dots
-  - ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[60,1]' --progress=dots
-  - ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[60,60]' --progress=dots
+  - ./vendor/bin/phpbench run --report=bench --progress=travis
 

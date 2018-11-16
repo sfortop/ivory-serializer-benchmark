@@ -25,14 +25,27 @@ abstract class AbstractBench
         $this->dataProvider = new DataProvider();
     }
 
-    final public function initData($params = [10, 10]): void
+    final public function initData(array $params): void
     {
         $this->data = $this->dataProvider->getData(...$params);
     }
 
+    /**
+     * @ParamProviders("provideComplexity")
+     */
     final public function benchSerialize(): void
     {
         $this->serialize($this->data);
+    }
+
+    public function provideComplexity(): array
+    {
+        return [
+            [10, 10],
+            [1, 60],
+            [60, 1],
+            [60, 60],
+        ];
     }
 
     abstract public function initSerializer(): void;

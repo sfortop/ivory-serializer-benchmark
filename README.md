@@ -46,28 +46,28 @@ We use [PHPBench](https://phpbench.readthedocs.io/) internally, with sane defaul
 To benchmark serialization, you can use:
 
 ``` bash
-$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench
 ```
 
 By default, the benchmarks run 5 [Revolutions])https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#improving-precision-revolutions)  5 [Iterations](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#verifying-and-improving-stability-iterations).
 You can override either with the `iterations` and `revs` option options.
 
 ``` bash
-$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted --iterations=10 --revs=10
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench --iterations=10 --revs=10
 ```
 
-If you want to increase the horizontal complexity of the serialization, you can use the `parameters` option 
-which is an array of two integers, the first representing the horizontal and the second representing the vertical complexity.
-The defaults are horizontal=10, vertical=10.
+By default, the benchmark runs different configurations of horizontal and vertical complexity.
+If you wish to specify your own, you can use the `parameters` option  which is an array of two 
+integers, the first representing the horizontal and the second representing the vertical complexity.
 
 ``` bash
-$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted --parameters='[1,60]'
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench --parameters='[1,2]'
 ```
 
 If you want to run the benchmark only for a specific or subset of serializers, you can use the `filter` option:
 
 ``` bash
-$ docker-compose run --rm php ./vendor/bin/phpbench run --report=aggregate-sorted --filter=Symfony
+$ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench --filter=Symfony
 ```
 
 Available serializers:
