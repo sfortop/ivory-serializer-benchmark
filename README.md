@@ -49,7 +49,7 @@ To benchmark serialization, you can use:
 $ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench
 ```
 
-By default, the benchmarks run 5 [Revolutions])https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#improving-precision-revolutions)  5 [Iterations](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#verifying-and-improving-stability-iterations).
+By default, the benchmarks run 5 [Revolutions](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#improving-precision-revolutions)  5 [Iterations](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#verifying-and-improving-stability-iterations).
 You can override either with the `iterations` and `revs` option options.
 
 ``` bash
