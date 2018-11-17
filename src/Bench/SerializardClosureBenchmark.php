@@ -83,4 +83,14 @@ class SerializardClosureBenchmark extends AbstractBench
     {
         $this->serializer->serialize($data, 'json');
     }
+
+    public function getName(): string
+    {
+        return 'Serializard Closure';
+    }
+
+    public function getPackageName(): string
+    {
+        return 'thunderer/serializard';
+    }
 }

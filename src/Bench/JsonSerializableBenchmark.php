@@ -22,4 +22,14 @@ class JsonSerializableBenchmark extends AbstractBench
             $data
         );
     }
+
+    public function getName(): string
+    {
+        return 'JsonSerializable';
+    }
+
+    public function getPackageName(): ?string
+    {
+        return null;
+    }
 }

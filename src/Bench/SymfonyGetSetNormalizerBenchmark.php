@@ -43,4 +43,14 @@ class SymfonyGetSetNormalizerBenchmark extends AbstractBench
     {
         $this->serializer->serialize($data, 'json');
     }
+
+    public function getName(): string
+    {
+        return 'Symfony Get/Set Normalizer';
+    }
+
+    public function getPackageName(): string
+    {
+        return 'symfony/serializer';
+    }
 }

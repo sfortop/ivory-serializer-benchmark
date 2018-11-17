@@ -8,5 +8,8 @@
             "cols": [ "suite", "benchmark", "mean", "diff", "worst", "best", "mem_real" ],
             "sort": {"mean": "asc"}
         }
-    }
+    },
+    "extensions": [
+        "PhpSerializers\\Benchmarks\\BenchExtension"
+    ]
 }
