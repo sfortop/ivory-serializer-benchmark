@@ -15,7 +15,7 @@ If you're interesting to use the project locally, follow the next steps.
 
 ### Set up the project
 
-The most easy way to set up the project is to install [Docker](https://www.docker.com) and
+The easiest way to set up the project is to install [Docker](https://www.docker.com) and
 [Docker Composer](https://docs.docker.com/compose/) and build the project. The configuration is shipped with a 
 distribution environment file allowing you to customize your current user/group ID:
 
@@ -41,7 +41,7 @@ $ docker-compose run --rm php composer install
 
 ### Benchmark
 
-We use [PHPBench](https://phpbench.readthedocs.io/) internally, with sane defaults setup for benchmarking the serializers.
+We use [PHPBench](https://phpbench.readthedocs.io/) internally, with same defaults setup for benchmarking the serializers.
 
 To benchmark serialization, you can use:
 
@@ -49,8 +49,8 @@ To benchmark serialization, you can use:
 $ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench
 ```
 
-By default, the benchmarks run 5 [Revolutions](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#improving-precision-revolutions)  5 [Iterations](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#verifying-and-improving-stability-iterations).
-You can override either with the `iterations` and `revs` option options.
+By default, the benchmark runs 5 [Revolutions](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#improving-precision-revolutions) and 5 [Iterations](https://phpbench.readthedocs.io/en/latest/writing-benchmarks.html#verifying-and-improving-stability-iterations).
+You can override either with the `iterations` and `revs` options.
 
 ``` bash
 $ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench --iterations=10 --revs=10
