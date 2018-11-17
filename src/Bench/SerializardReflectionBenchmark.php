@@ -50,11 +50,6 @@ class SerializardReflectionBenchmark extends AbstractBench
         $this->serializer->serialize($data, 'json');
     }
 
-    public function getName(): string
-    {
-        return 'Serializard Reflection';
-    }
-
     public function getPackageName(): string
     {
         return 'thunderer/serializard';

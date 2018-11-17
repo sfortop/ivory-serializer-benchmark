@@ -44,11 +44,6 @@ class IvoryBenchmark extends AbstractBench
         $this->serializer->serialize($data, 'json');
     }
 
-    public function getName(): string
-    {
-        return 'Ivory';
-    }
-
     public function getPackageName(): string
     {
         return 'egeloen/serializer';

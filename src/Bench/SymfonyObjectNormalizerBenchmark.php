@@ -49,11 +49,6 @@ class SymfonyObjectNormalizerBenchmark extends AbstractBench
         $this->serializer->serialize($data, 'json');
     }
 
-    public function getName(): string
-    {
-        return 'Symfony Object Normalizer';
-    }
-
     public function getPackageName(): string
     {
         return 'symfony/serializer';

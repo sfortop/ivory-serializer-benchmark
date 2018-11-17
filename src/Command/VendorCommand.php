@@ -77,7 +77,7 @@ class VendorCommand extends Command
 
             $instance = $ref->newInstanceWithoutConstructor();
 
-            $rows[] = [$instance->getName(), $this->getVersion($instance->getPackageName())];
+            $rows[] = [$ref->getShortName(), $this->getVersion($instance->getPackageName())];
         }
 
         $style = new SymfonyStyle($input, $output);

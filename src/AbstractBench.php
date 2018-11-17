@@ -52,7 +52,5 @@ abstract class AbstractBench
 
     abstract protected function serialize(Forum $data): void;
 
-    abstract public function getName(): string;
-
     abstract public function getPackageName(): ?string;
 }
