@@ -41,7 +41,7 @@ $ docker-compose run --rm php composer install
 
 ### Benchmark
 
-We use [PHPBench](https://phpbench.readthedocs.io/) internally, with same defaults setup for benchmarking the serializers.
+We use [PHPBench](https://phpbench.readthedocs.io/) internally, with sane defaults setup for benchmarking the serializers.
 
 To benchmark serialization, you can use:
 
