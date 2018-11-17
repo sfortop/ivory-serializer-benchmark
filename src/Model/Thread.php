@@ -6,6 +6,7 @@ namespace PhpSerializers\Benchmarks\Model;
 
 use Ivory\Serializer\Mapping\Annotation as Ivory;
 use JMS\Serializer\Annotation as Jms;
+use TSantos\Serializer\Mapping as TSantos;
 
 /**
  * @author GeLo <geloen.eric@gmail.com>
@@ -17,6 +18,7 @@ class Thread implements \JsonSerializable
     /**
      * @Ivory\Type("int")
      * @Jms\Type("integer")
+     * @TSantos\Type("integer")
      *
      * @var int
      */
@@ -25,6 +27,7 @@ class Thread implements \JsonSerializable
     /**
      * @Ivory\Type("string")
      * @Jms\Type("string")
+     * @TSantos\Type("string")
      *
      * @var string
      */
@@ -33,6 +36,7 @@ class Thread implements \JsonSerializable
     /**
      * @Ivory\Type("string")
      * @Jms\Type("string")
+     * @TSantos\Type("string")
      *
      * @var string
      */
@@ -41,6 +45,7 @@ class Thread implements \JsonSerializable
     /**
      * @Ivory\Type("float")
      * @Jms\Type("float")
+     * @TSantos\Type("float")
      *
      * @var float
      */
@@ -49,6 +54,7 @@ class Thread implements \JsonSerializable
     /**
      * @Ivory\Type("array<key=int, value=PhpSerializers\Benchmarks\Model\Comment>")
      * @Jms\Type("array<integer, PhpSerializers\Benchmarks\Model\Comment>")
+     * @TSantos\Type("PhpSerializers\Benchmarks\Model\Comment[]")
      *
      * @var Comment[]
      */
