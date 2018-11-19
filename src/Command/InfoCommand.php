@@ -6,6 +6,7 @@ use PhpBench\Benchmark\BenchmarkFinder;
 use PhpBench\Benchmark\Metadata\BenchmarkMetadata;
 use PhpSerializers\Benchmarks\AbstractBench;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -13,7 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @author Tales Santos <tales.augusto.santos@gmail.com>
  */
-class VendorCommand extends Command
+class InfoCommand extends Command
 {
     /**
      * @var BenchmarkFinder
@@ -45,8 +46,13 @@ class VendorCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('vendors')
-            ->setDescription('List all available serializers and its current version');
+            ->setName('info')
+            ->addArgument('serializer', InputArgument::OPTIONAL, 'Serializer name to inspect')
+            ->setDescription('Show information about available serializers.')
+            ->setHelp(
+                'The <info>%command.name%</info> displays detailed information about a serializer (e.g. version, capabilities and notes), 
+                       or lists all serialized available'
+            );
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
