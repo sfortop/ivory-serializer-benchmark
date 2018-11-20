@@ -2,14 +2,14 @@
 
 namespace PhpSerializers\Benchmarks\Command;
 
-use PhpBench\Benchmark\BenchmarkFinder;
-use PhpBench\Benchmark\Metadata\BenchmarkMetadata;
-use PhpSerializers\Benchmarks\AbstractBench;
+use PhpSerializers\Benchmarks\BenchFinder;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * @author Tales Santos <tales.augusto.santos@gmail.com>
@@ -17,30 +17,18 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class InfoCommand extends Command
 {
     /**
-     * @var BenchmarkFinder
+     * @var BenchFinder
      */
     private $finder;
 
     /**
-     * @var string
+     * InfoCommand constructor.
+     * @param BenchFinder $finder
      */
-    private $path;
-
-    /**
-     * @var array
-     */
-    private $packages;
-
-    /**
-     * VendorCommand constructor.
-     * @param BenchmarkFinder $finder
-     * @param string $path
-     */
-    public function __construct(BenchmarkFinder $finder, string $path)
+    public function __construct(BenchFinder $finder)
     {
         parent::__construct();
         $this->finder = $finder;
-        $this->path = $path;
     }
 
     protected function configure()
@@ -55,53 +43,37 @@ class InfoCommand extends Command
             );
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-        if (!file_exists($lockFile = __DIR__ . '/../../composer.lock')) {
-            throw new \RuntimeException(
-                'File composer.lock was not found. You should install the dependencies before running this command'
-            );
-        }
-
-        $this->packages = json_decode(file_get_contents($lockFile), true);
-    }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $benchmarks = $this->finder->findBenchmarks($this->path);
-
-        $rows = [];
-
-        /** @var BenchmarkMetadata $benchmark */
-        foreach ($benchmarks as $benchmark) {
-
-            $ref = new \ReflectionClass($benchmark->getClass());
-
-            if (!$ref->isSubclassOf(AbstractBench::class)) {
-                continue;
-            }
-
-            $instance = $ref->newInstanceWithoutConstructor();
-
-            $rows[] = [$ref->getShortName(), $this->getVersion($instance->getPackageName())];
-        }
-
-        $style = new SymfonyStyle($input, $output);
-        $style->table(['name', 'version'], $rows);
+        $this->displayAll($output);
     }
 
-    private function getVersion(?string $package): string
+    private function displayAll(OutputInterface $output): void
     {
-        if (null === $package) {
-            return 'N/A';
-        }
+        $rows = [];
 
-        foreach ($this->packages['packages'] as $pck) {
-            if ($pck['name'] === $package) {
-                return $pck['version'];
+        foreach ($this->finder->findAll() as $benchmarks) {
+            foreach ($benchmarks as $i => $benchmark) {
+                $row = [
+                    $benchmark['name'],
+                ];
+
+                if ($i === 0) {
+                    $row[] = new TableCell($benchmark['version'], ['rowspan' => count($benchmarks)]);
+                }
+
+                $row[] = $benchmark['note'];
+                $rows[] = $row;
             }
+
+            $rows[] = new TableSeparator();
         }
 
-        return 'N/A';
+        array_pop($rows);
+
+        $table= new Table($output);
+        $table->setHeaders(['Benchmark', 'Version', 'Note']);
+        $table->setRows($rows);
+        $table->render();
     }
 }
