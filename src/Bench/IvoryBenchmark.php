@@ -48,4 +48,11 @@ class IvoryBenchmark extends AbstractBench
     {
         return 'egeloen/serializer';
     }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serializer for PHP 5.6+ supporting JSON, XML, YAML & CSV
+NOTE;
+    }
 }

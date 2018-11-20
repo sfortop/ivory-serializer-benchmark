@@ -54,4 +54,11 @@ class SerializardReflectionBenchmark extends AbstractBench
     {
         return 'thunderer/serializard';
     }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs extracting its value through property reflection
+NOTE;
+    }
 }

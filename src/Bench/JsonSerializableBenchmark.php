@@ -23,8 +23,15 @@ class JsonSerializableBenchmark extends AbstractBench
         );
     }
 
-    public function getPackageName(): ?string
+    public function getPackageName(): string
     {
-        return null;
+        return 'php/json-serializable';
+    }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs using the native JsonSerializable interface
+NOTE;
     }
 }

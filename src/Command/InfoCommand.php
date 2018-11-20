@@ -45,10 +45,8 @@ class InfoCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $style = new SymfonyStyle($input, $output);
-
         if (null === $benchmark = $input->getArgument('serializer')) {
-            $this->displayAll($style, $output);
+            $this->displayAll($output);
             return;
         }
 

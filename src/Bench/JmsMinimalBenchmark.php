@@ -45,4 +45,11 @@ class JmsMinimalBenchmark extends AbstractBench
     {
         return 'jms/serializer';
     }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs with default handlers disabled
+NOTE;
+    }
 }

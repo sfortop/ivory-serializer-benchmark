@@ -53,4 +53,11 @@ class SymfonyObjectNormalizerBenchmark extends AbstractBench
     {
         return 'symfony/serializer';
     }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs using Symfony Property Access component
+NOTE;
+    }
 }

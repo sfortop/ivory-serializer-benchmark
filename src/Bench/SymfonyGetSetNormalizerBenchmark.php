@@ -48,4 +48,11 @@ class SymfonyGetSetNormalizerBenchmark extends AbstractBench
     {
         return 'symfony/serializer';
     }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs extracting the property values through its getter method
+NOTE;
+    }
 }

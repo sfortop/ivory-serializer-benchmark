@@ -88,4 +88,11 @@ class SerializardClosureBenchmark extends AbstractBench
     {
         return 'thunderer/serializard';
     }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs using closures as custom normalizers
+NOTE;
+    }
 }
