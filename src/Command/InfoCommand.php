@@ -45,7 +45,14 @@ class InfoCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->displayAll($output);
+        $style = new SymfonyStyle($input, $output);
+
+        if (null === $benchmark = $input->getArgument('serializer')) {
+            $this->displayAll($style, $output);
+            return;
+        }
+
+        $this->displayOne($output, $benchmark);
     }
 
     private function displayAll(OutputInterface $output): void
@@ -75,5 +82,14 @@ class InfoCommand extends Command
         $table->setHeaders(['Benchmark', 'Version', 'Note']);
         $table->setRows($rows);
         $table->render();
+    }
+
+    private function displayOne(OutputInterface $output, string $benchmark): void
+    {
+        $foundBenchmark = $this->finder->findOne($benchmark);
+        $output->writeln(sprintf('<info>name</info>    : %s', $foundBenchmark['name']));
+        $output->writeln(sprintf('<info>package</info> : %s', $foundBenchmark['package']));
+        $output->writeln(sprintf('<info>version</info> : %s', $foundBenchmark['version']));
+        $output->writeln(sprintf('<info>note</info>    : %s', $foundBenchmark['note']));
     }
 }

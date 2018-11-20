@@ -48,6 +48,19 @@ class BenchFinder
         return $benchmarks;
     }
 
+    public function findOne(string $name): array
+    {
+        $benchmarksFound = $this->internalFinder->findBenchmarks($this->path, [$name]);
+
+        if (empty($benchmarksFound)) {
+            throw new \InvalidArgumentException('There is no benchmark with name "' . $name . '"');
+        }
+
+        $bench = current($benchmarksFound);
+
+        return $this->createBenchData($bench);
+    }
+
     private function createBenchData(BenchmarkMetadata $metadata): array
     {
         $ref = new \ReflectionClass($metadata->getClass());
