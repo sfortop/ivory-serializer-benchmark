@@ -43,4 +43,19 @@ class TSantosBenchmark extends AbstractBench
     {
         $this->serializer->serialize($data);
     }
+
+    public function getPackageName(): string
+    {
+        return 'tsantos/serializer';
+    }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serializes an object graphs using generated data extractor for each class
+NOTE;
+
+    }
+
+
 }
