@@ -14,6 +14,6 @@ install:
   - composer install --classmap-authoritative
 
 script:
-  - ./vendor/bin/phpbench vendor
+  - ./vendor/bin/phpbench info
   - ./vendor/bin/phpbench run --report=bench --progress=travis
 
