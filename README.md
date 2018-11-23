@@ -75,7 +75,7 @@ $ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench --filter=
 You can see a list of the serializer available and its current version by running the following command:
 
 ``` bash
-$ docker-compose run --rm php ./vendor/bin/phpbench vendor
+$ docker-compose run --rm php ./vendor/bin/phpbench info
 ```
 
 Available implementations:
