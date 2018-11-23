@@ -81,6 +81,7 @@ $ docker-compose run --rm php ./vendor/bin/phpbench info
 Available implementations:
 
 * `Ivory`
+* `JaneAutomapper`
 * `Jms`
 * `JmsMinimal`
 * `JsonSerializable`
