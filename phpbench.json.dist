@@ -5,7 +5,7 @@
         "bench": {
             "extends": "aggregate",
             "break": ["params"],
-            "cols": [ "suite", "benchmark", "mean", "diff", "worst", "best", "mem_real" ],
+            "cols": [ "benchmark", "mean", "diff", "worst", "best", "mem_real" ],
             "sort": {"mean": "asc"}
         }
     },
