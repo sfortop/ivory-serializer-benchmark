@@ -70,7 +70,15 @@ If you want to run the benchmark only for a specific or subset of serializers, y
 $ docker-compose run --rm php ./vendor/bin/phpbench run --report=bench --filter=Symfony
 ```
 
-Available serializers:
+### Available serializers
+
+You can see a list of the serializer available and its current version by running the following command:
+
+``` bash
+$ docker-compose run --rm php ./vendor/bin/phpbench info
+```
+
+Available implementations:
 
 * `Ivory`
 * `Jms`

@@ -36,4 +36,16 @@ class JmsBenchmark extends AbstractBench
     {
         $this->serializer->serialize($data, 'json');
     }
+
+    public function getPackageName(): string
+    {
+        return 'jms/serializer';
+    }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs with default handlers enabled
+NOTE;
+    }
 }

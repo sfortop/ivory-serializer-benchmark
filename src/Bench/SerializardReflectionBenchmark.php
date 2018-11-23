@@ -49,4 +49,16 @@ class SerializardReflectionBenchmark extends AbstractBench
     {
         $this->serializer->serialize($data, 'json');
     }
+
+    public function getPackageName(): string
+    {
+        return 'thunderer/serializard';
+    }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs extracting its value through property reflection
+NOTE;
+    }
 }

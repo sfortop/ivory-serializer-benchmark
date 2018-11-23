@@ -40,4 +40,16 @@ class JmsMinimalBenchmark extends AbstractBench
     {
         $this->serializer->serialize($data, 'json');
     }
+
+    public function getPackageName(): string
+    {
+        return 'jms/serializer';
+    }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Serialize object graphs with a minimal set of handlers
+NOTE;
+    }
 }
