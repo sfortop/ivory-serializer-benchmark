@@ -89,4 +89,16 @@ class JaneAutomapperBenchmark extends AbstractBench
         $array = $this->mapper->map($data, new Context());
         json_encode($array);
     }
+
+    public function getPackageName(): string
+    {
+       return 'jane-php/automapper';
+    }
+
+    public function getNote(): string
+    {
+        return <<<'NOTE'
+Map object graphs to an array then use json_encode to serialize it
+NOTE;
+    }
 }
