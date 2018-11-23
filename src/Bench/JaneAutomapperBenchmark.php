@@ -12,6 +12,7 @@ use Jane\AutoMapper\Compiler\Transformer\ArrayTransformerFactory;
 use Jane\AutoMapper\Compiler\Transformer\BuiltinTransformerFactory;
 use Jane\AutoMapper\Compiler\Transformer\ChainTransformerFactory;
 use Jane\AutoMapper\Compiler\Transformer\MultipleTransformerFactory;
+use Jane\AutoMapper\Compiler\Transformer\NullableTransformerFactory;
 use Jane\AutoMapper\Compiler\Transformer\ObjectTransformerFactory;
 use Jane\AutoMapper\Context;
 use Jane\AutoMapper\Mapper;
@@ -71,6 +72,7 @@ class JaneAutomapperBenchmark extends AbstractBench
         );
 
         $transformerFactory->addTransformerFactory(new MultipleTransformerFactory($transformerFactory));
+        $transformerFactory->addTransformerFactory(new NullableTransformerFactory($transformerFactory));
         $transformerFactory->addTransformerFactory(new BuiltinTransformerFactory());
         $transformerFactory->addTransformerFactory(new ArrayTransformerFactory($transformerFactory));
         $transformerFactory->addTransformerFactory(new ObjectTransformerFactory($automapper, new MapperConfigurationFactory(
