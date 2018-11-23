@@ -49,7 +49,7 @@ class JmsMinimalBenchmark extends AbstractBench
     public function getNote(): string
     {
         return <<<'NOTE'
-Serialize object graphs with default handlers disabled
+Serialize object graphs with a minimal set of handlers
 NOTE;
     }
 }
