@@ -5,6 +5,8 @@ namespace PhpSerializers\Benchmarks\Bench;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Jane\AutoMapper\AutoMapper;
 use Jane\AutoMapper\Compiler\Accessor\ReflectionAccessorExtractor;
+use Jane\AutoMapper\Compiler\Compiler;
+use Jane\AutoMapper\Compiler\FileLoader;
 use Jane\AutoMapper\Compiler\FromSourcePropertiesMappingExtractor;
 use Jane\AutoMapper\Compiler\FromTargetPropertiesMappingExtractor;
 use Jane\AutoMapper\Compiler\SourceTargetPropertiesMappingExtractor;
@@ -33,7 +35,9 @@ class JaneAutomapperBenchmark extends AbstractBench
 
     public function initSerializer(): void
     {
-        $automapper = new AutoMapper();
+        if (!file_exists($cache = __DIR__. '/../../cache/automapper')) {
+            mkdir($cache);
+        }
         $reflectionExtractor = new ReflectionExtractor();
         $phpDocExtractor = new PhpDocExtractor();
         $transformerFactory = new ChainTransformerFactory();
@@ -71,15 +75,17 @@ class JaneAutomapperBenchmark extends AbstractBench
             new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()))
         );
 
+        $automapper = new AutoMapper(new FileLoader(new Compiler(), $cache), new MapperConfigurationFactory(
+            $sourceTargetMappingExtractor,
+            $fromSourceMappingExtractor,
+            $fromTargetMappingExtractor
+        ));
+
         $transformerFactory->addTransformerFactory(new MultipleTransformerFactory($transformerFactory));
         $transformerFactory->addTransformerFactory(new NullableTransformerFactory($transformerFactory));
         $transformerFactory->addTransformerFactory(new BuiltinTransformerFactory());
         $transformerFactory->addTransformerFactory(new ArrayTransformerFactory($transformerFactory));
-        $transformerFactory->addTransformerFactory(new ObjectTransformerFactory($automapper, new MapperConfigurationFactory(
-            $sourceTargetMappingExtractor,
-            $fromSourceMappingExtractor,
-            $fromTargetMappingExtractor
-        ), true));
+        $transformerFactory->addTransformerFactory(new ObjectTransformerFactory($automapper));
 
         $configurationForum = new MapperConfiguration($fromSourceMappingExtractor, Forum::class, 'array');
         $automapper->register($configurationForum);
