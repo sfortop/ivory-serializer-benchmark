@@ -1,6 +1,6 @@
 <?php
 
-namespace Ivory\Tests\Serializer\Benchmark;
+namespace PhpSerializers\Benchmarks\Bench;
 
 use BetterSerializer\Builder;
 use BetterSerializer\Common\SerializationType;
@@ -9,7 +9,7 @@ use PhpSerializers\Benchmarks\AbstractBench;
 use PhpSerializers\Benchmarks\Model\Forum;
 
 /**
- * @author GeLo <geloen.eric@gmail.com>
+ * @author Rastusik
  */
 class BetterSerializerBenchmark extends AbstractBench
 {
