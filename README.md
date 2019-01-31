@@ -80,6 +80,7 @@ $ docker-compose run --rm php ./vendor/bin/phpbench info
 
 Available implementations:
 
+* `BetterSerializer`
 * `Ivory`
 * `JaneAutomapper`
 * `Jms`

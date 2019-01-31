@@ -1,13 +1,10 @@
-FROM php:latest
+FROM php:7.2
 
 # APT packages
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     git \
     && rm -rf /var/lib/apt/lists/*
-
-# PHP extensions
-RUN docker-php-ext-install zip
 
 # APCU extension
 RUN pecl install apcu \
